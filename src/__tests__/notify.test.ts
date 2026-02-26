@@ -51,6 +51,20 @@ describe('sendNotification', () => {
     ),
   })
 
+  const makeCtxWithTN = (tnAvailable: boolean) => {
+    let callCount = 0
+    const mockFn = vi.fn().mockImplementation(() => {
+      callCount++
+      // First call is `which terminal-notifier`
+      if (callCount === 1) {
+        return { nothrow: () => ({ quiet: () => Promise.resolve({ exitCode: tnAvailable ? 0 : 1 }) }) }
+      }
+      // Subsequent calls are the actual notification command
+      return { nothrow: () => ({ quiet: () => Promise.resolve({ exitCode: 0 }) }) }
+    })
+    return { $: Object.assign(mockFn, { nothrow: vi.fn() }) }
+  }
+
   it('does not throw for osc99 protocol', async () => {
     const ctx = makeCtx()
     await expect(
@@ -126,7 +140,7 @@ describe('sendNotification', () => {
     ).resolves.not.toThrow()
   })
 
-  it('osc99 calls ctx.$ (kitten notify)', async () => {
+  it('osc99 on linux calls ctx.$ (kitten notify)', async () => {
     const ctx = makeCtx()
     await sendNotification(ctx as any, {
       terminal: 'kitty',
@@ -138,5 +152,45 @@ describe('sendNotification', () => {
       timeout: 5,
     })
     expect(ctx.$).toHaveBeenCalled()
+  })
+
+  it('osc99 on macOS with terminal-notifier available', async () => {
+    const ctx = makeCtxWithTN(true)
+    await sendNotification(ctx as any, {
+      terminal: 'kitty',
+      protocol: 'osc99',
+      platform: 'macos',
+      title: 'Test',
+      body: 'Body',
+      identifier: 'i7',
+      timeout: 5,
+    })
+    expect(ctx.$).toHaveBeenCalledTimes(2)
+    // First call: which terminal-notifier
+    const firstCall = (ctx.$ as any).mock.calls[0][0]
+    expect(firstCall[0]).toContain('which terminal-notifier')
+    // Second call: terminal-notifier (not kitten notify)
+    const secondCall = (ctx.$ as any).mock.calls[1][0]
+    expect(secondCall[0]).toContain('terminal-notifier')
+  })
+
+  it('osc99 on macOS without terminal-notifier falls back to kitten notify', async () => {
+    const ctx = makeCtxWithTN(false)
+    await sendNotification(ctx as any, {
+      terminal: 'kitty',
+      protocol: 'osc99',
+      platform: 'macos',
+      title: 'Test',
+      body: 'Body',
+      identifier: 'i8',
+      timeout: 5,
+    })
+    expect(ctx.$).toHaveBeenCalledTimes(2)
+    // First call: which terminal-notifier
+    const firstCall = (ctx.$ as any).mock.calls[0][0]
+    expect(firstCall[0]).toContain('which terminal-notifier')
+    // Second call: kitten notify (fallback)
+    const secondCall = (ctx.$ as any).mock.calls[1][0]
+    expect(secondCall[0]).toContain('kitten notify')
   })
 })

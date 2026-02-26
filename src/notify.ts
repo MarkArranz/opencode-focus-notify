@@ -30,7 +30,18 @@ export async function sendNotification(
   try {
     switch (protocol) {
       case 'osc99':
-        await ctx.$`kitten notify --app-name ${title} --sound-name system --identifier ${identifier} ${title} ${body}`.nothrow().quiet()
+        if (platform === 'macos') {
+          // terminal-notifier with -activate + -sender achieves click-to-focus on macOS
+          // Fire-and-forget (terminal-notifier blocks until dismissed, so don't await)
+          const tnCheck = await ctx.$`which terminal-notifier`.nothrow().quiet()
+          if (tnCheck.exitCode === 0) {
+            void ctx.$`terminal-notifier -message ${body} -title ${title} -activate net.kovidgoyal.kitty -sender net.kovidgoyal.kitty -sound default`.nothrow().quiet()
+          } else {
+            await ctx.$`kitten notify --app-name ${title} --sound-name system --identifier ${identifier} ${title} ${body}`.nothrow().quiet()
+          }
+        } else {
+          await ctx.$`kitten notify --app-name ${title} --sound-name system --identifier ${identifier} ${title} ${body}`.nothrow().quiet()
+        }
         break
       case 'osc777':
         process.stdout.write(formatOSC777(title, body))
