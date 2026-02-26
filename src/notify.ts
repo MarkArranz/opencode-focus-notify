@@ -31,11 +31,11 @@ export async function sendNotification(
     switch (protocol) {
       case 'osc99':
         if (platform === 'macos') {
-          // terminal-notifier with -activate + -sender achieves click-to-focus on macOS
+          // terminal-notifier with -activate achieves click-to-focus on macOS
           // Fire-and-forget (terminal-notifier blocks until dismissed, so don't await)
           const tnCheck = await ctx.$`which terminal-notifier`.nothrow().quiet()
           if (tnCheck.exitCode === 0) {
-            void ctx.$`terminal-notifier -message ${body} -title ${title} -activate net.kovidgoyal.kitty -sender net.kovidgoyal.kitty -sound default`.nothrow().quiet()
+            void ctx.$`terminal-notifier -message ${body} -title ${title} -activate net.kovidgoyal.kitty -sound default`.nothrow().quiet()
           } else {
             await ctx.$`kitten notify --app-name ${title} --sound-name system --identifier ${identifier} ${title} ${body}`.nothrow().quiet()
           }
