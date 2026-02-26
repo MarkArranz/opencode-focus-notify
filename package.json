@@ -1,0 +1,38 @@
+{
+  "name": "@markarranz/opencode-focus-notify",
+  "version": "0.1.0",
+  "description": "Terminal-native OpenCode notification plugin with click-to-focus for kitty",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist/"],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run typecheck && npm run test && npm run build"
+  },
+  "keywords": ["opencode", "opencode-plugin", "notifications", "terminal", "kitty", "osc99"],
+  "author": "Mark Arranz",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarkArranz/opencode-focus-notify.git"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "vitest": "^2.0.0",
+    "tsup": "^8.0.0",
+    "@opencode-ai/plugin": "^1.2.10",
+    "@types/node": "^20.0.0"
+  }
+}
