@@ -37,7 +37,7 @@ Add to your `opencode.json`:
 
 ```json
 {
-  "plugins": ["markarranz/opencode-focus-notify"]
+  "plugins": ["@markarranz/opencode-focus-notify"]
 }
 ```
 

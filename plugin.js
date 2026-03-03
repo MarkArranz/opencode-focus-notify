@@ -1,13 +1,13 @@
+import { dirname, join } from "path"
+import { fileURLToPath } from "url"
+
 // opencode-focus-notify — Desktop notifications that focus the correct terminal.
-//
-// Install:
-//   1. Copy this file to ~/.config/opencode/plugins/opencode-focus-notify.js
-//   2. Set NOTIFY_HOOK_SCRIPT to the path of notify.sh (default: ~/.local/bin/opencode-focus-notify)
+// https://github.com/markarranz/opencode-focus-notify
 
 export const plugin = async ({ $ }) => {
+  const __dirname = dirname(fileURLToPath(import.meta.url))
   const notify_hook_script =
-    process.env.NOTIFY_HOOK_SCRIPT ||
-    `${process.env.HOME || ""}/.local/bin/opencode-focus-notify`
+    process.env.NOTIFY_HOOK_SCRIPT || join(__dirname, "notify.sh")
 
   const sanitize = (value, pattern) => {
     if (!value) return ""

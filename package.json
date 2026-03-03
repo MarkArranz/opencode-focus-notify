@@ -1,0 +1,28 @@
+{
+  "name": "@markarranz/opencode-focus-notify",
+  "version": "1.0.0",
+  "description": "Desktop notifications for OpenCode with click-to-focus via OSC 99",
+  "main": "plugin.js",
+  "type": "module",
+  "files": [
+    "plugin.js",
+    "notify.sh"
+  ],
+  "keywords": [
+    "opencode",
+    "opencode-plugin",
+    "notifications",
+    "osc99",
+    "kitty"
+  ],
+  "author": "Mark Arranz",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/markarranz/opencode-focus-notify"
+  },
+  "homepage": "https://github.com/markarranz/opencode-focus-notify#readme",
+  "bugs": {
+    "url": "https://github.com/markarranz/opencode-focus-notify/issues"
+  }
+}
