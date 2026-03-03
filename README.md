@@ -16,6 +16,7 @@ The notification engine has two paths:
 
 - macOS
 - An OSC 99-capable terminal (see [Terminal Compatibility](#terminal-compatibility))
+- Works with the [OpenCode CLI](https://opencode.ai), not the desktop application
 
 For Kitty enhanced mode (optional):
 - Kitty 0.36.0+ with remote control enabled
