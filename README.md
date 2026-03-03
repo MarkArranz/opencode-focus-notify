@@ -33,22 +33,15 @@ listen_on unix:/tmp/mykitty-{kitty_pid}
 
 ## Install
 
-1. Copy `notify.sh` to your PATH:
+Add to your `opencode.json`:
 
-   ```sh
-   mkdir -p ~/.local/bin
-   cp notify.sh ~/.local/bin/opencode-focus-notify
-   chmod +x ~/.local/bin/opencode-focus-notify
-   ```
+```json
+{
+  "plugins": ["markarranz/opencode-focus-notify"]
+}
+```
 
-2. Copy `plugin.js` to your OpenCode plugins directory:
-
-   ```sh
-   mkdir -p ~/.config/opencode/plugins
-   cp plugin.js ~/.config/opencode/plugins/opencode-focus-notify.js
-   ```
-
-3. Restart OpenCode.
+OpenCode installs the plugin automatically on next launch.
 
 ## Terminal Compatibility
 
@@ -107,8 +100,8 @@ Expected output includes `path=kitty` or `path=generic` and the discovered TTY d
 
 ## License
 
-MIT - [Mark Arranz](https://github.com/MarkArranz)
+MIT - [Mark Arranz](https://github.com/markarranz)
 
 ```sh
-git clone https://github.com/MarkArranz/opencode-focus-notify.git
+git clone https://github.com/markarranz/opencode-focus-notify.git
 ```
