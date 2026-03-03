@@ -28,6 +28,8 @@ allow_remote_control yes
 listen_on unix:/tmp/mykitty-{kitty_pid}
 ```
 
+> `{kitty_pid}` is a built-in Kitty variable — Kitty replaces it with its own process ID at startup. Use the literal string as shown.
+
 ## Install
 
 1. Copy `notify.sh` to your PATH:
