@@ -55,11 +55,13 @@ Works with terminals that implement OSC 99 desktop notifications. Click-to-focus
 
 | Terminal | OSC 99 Support | Notes |
 |---|---|---|
-| Kitty | Yes | Enhanced mode via remote control when Kitty env vars are present |
-| foot | Yes | OSC 99 support available |
-| VS Code | Yes | OSC 99 support available |
-| Contour | Planned | Not yet released |
-| Ghostty | In progress | Under active development |
+| Kitty | ✅ Full | Enhanced mode via remote control when Kitty env vars are present |
+| Ghostty | 🚧 In progress | [PR open](https://github.com/ghostty-org/ghostty/pull/10467), milestone 1.4.0 |
+| WezTerm | ❌ No | Not supported — notifications will not be sent |
+| Alacritty | ❌ No | Not supported — notifications will not be sent |
+| foot | ✅ Full | Since v1.18.0 |
+| VS Code | ✅ Full | Integrated terminal, since Feb 2026 |
+| Contour | 🚧 Planned | OSC 99 in unreleased v0.6.3 |
 
 ## Known Limitations
 
