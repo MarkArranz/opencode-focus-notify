@@ -1,12 +1,11 @@
 {
   "name": "@markarranz/opencode-focus-notify",
   "version": "1.0.1",
-  "description": "Desktop notifications for OpenCode with click-to-focus via OSC 99",
+  "description": "Desktop notifications for OpenCode with click-to-focus via terminal-notifier",
   "main": "plugin.js",
   "type": "module",
   "files": [
-    "plugin.js",
-    "notify.sh"
+    "plugin.js"
   ],
   "scripts": {
     "test": "node --test tests/test_plugin_events.mjs"
@@ -15,7 +14,7 @@
     "opencode",
     "opencode-plugin",
     "notifications",
-    "osc99",
+    "terminal-notifier",
     "kitty"
   ],
   "author": "Mark Arranz",
