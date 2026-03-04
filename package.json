@@ -1,15 +1,27 @@
 {
   "name": "@markarranz/opencode-focus-notify",
   "version": "1.0.1",
-  "description": "Desktop notifications for OpenCode with click-to-focus via terminal-notifier",
-  "main": "plugin.js",
+  "description": "Desktop notifications for OpenCode with click-to-focus for kitty",
+  "main": "dist/plugin.js",
   "type": "module",
-  "files": [
-    "plugin.js"
-  ],
   "scripts": {
-    "test": "node --test tests/test_plugin_events.mjs"
+    "build": "bun build src/plugin.ts --outdir dist --target node",
+    "postinstall": "node scripts/postinstall.js",
+    "test": "bun test",
+    "prepublishOnly": "bun run build"
   },
+  "peerDependencies": {
+    "@opencode-ai/plugin": ">=1.0.0"
+  },
+  "devDependencies": {
+    "@opencode-ai/plugin": "^1.2.16",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.0.0"
+  },
+  "files": [
+    "dist/",
+    "scripts/"
+  ],
   "keywords": [
     "opencode",
     "opencode-plugin",
